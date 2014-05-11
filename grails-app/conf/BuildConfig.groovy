@@ -61,6 +61,8 @@ grails.project.dependency.resolution = {
         // plugins for the compile step
         compile ":scaffolding:2.0.2"
         compile ':cache:1.1.1'
+        compile ":quartz:1.0.1"
+		compile ":background-thread:1.6"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.8" // or ":hibernate4:4.3.1.1"
@@ -69,18 +71,8 @@ grails.project.dependency.resolution = {
         runtime ":resources:1.2.1"
 		compile ":spring-security-core:2.0-RC2"
 		compile ":spring-security-ui:1.0-RC1"
-        // Uncomment these (or add new ones) to enable additional resources capabilities
-        //runtime ":zipped-resources:1.0.1"
-        //runtime ":cached-resources:1.1"
-        //runtime ":yui-minify-resources:0.1.5"
-
-        // An alternative to the default resources plugin is the asset-pipeline plugin
-        //compile ":asset-pipeline:1.5.0"
-
-        // Uncomment these to enable additional asset-pipeline capabilities
-        //compile ":sass-asset-pipeline:1.5.1"
-        //compile ":less-asset-pipeline:1.5.0"
-        //compile ":coffee-asset-pipeline:1.5.0"
-        //compile ":handlebars-asset-pipeline:1.0.0.3"
+		
+		runtime ':email-confirmation:2.0.8'
+        runtime ':mail:1.0.1'
     }
 }
