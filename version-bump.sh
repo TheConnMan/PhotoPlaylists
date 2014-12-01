@@ -22,7 +22,7 @@ else
     git merge --no-ff dev
     
     echo -e "\nTagging version $1."
-    git tag -a $1 -m $2
+    git tag -a v$1 -m "$2"
     
     git checkout dev
     
