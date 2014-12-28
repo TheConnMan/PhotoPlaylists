@@ -61,6 +61,7 @@ environments {
                logAbandoned = false // causes stacktrace recording overhead, use only for debugging
             }
         }
+    }
     production {
         dataSource {
             dbCreate = "update"
