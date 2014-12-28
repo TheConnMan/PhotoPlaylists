@@ -19,4 +19,8 @@ class Photo {
 		lastViewed nullable: true
 		fileLocation()
     }
+	
+	String toString() {
+		name
+	}
 }
