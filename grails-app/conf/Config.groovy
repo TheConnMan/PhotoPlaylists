@@ -117,9 +117,9 @@ log4j = {
 grails.app.context = '/'
 
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.theconnman.User'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.theconnman.UserRole'
-grails.plugin.springsecurity.authority.className = 'com.theconnman.Role'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.madconn.photoplaylists.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.madconn.photoplaylists.UserRole'
+grails.plugin.springsecurity.authority.className = 'com.madconn.photoplaylists.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':								['ROLE_ADMIN'],
 	'/index':							['permitAll'],
@@ -128,6 +128,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/css/**':						['permitAll'],
 	'/**/images/**':					['permitAll'],
 	'/**/favicon.ico':					['permitAll'],
-	'/home/**':							['permitAll']
+	'/home/**':							['ROLE_ADMIN']
 ]
 

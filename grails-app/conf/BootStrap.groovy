@@ -1,6 +1,6 @@
-import com.theconnman.Role
-import com.theconnman.User
-import com.theconnman.UserRole
+import com.madconn.photoplaylists.Role
+import com.madconn.photoplaylists.User
+import com.madconn.photoplaylists.UserRole
 
 class BootStrap {
 	

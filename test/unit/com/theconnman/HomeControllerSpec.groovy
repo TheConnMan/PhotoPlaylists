@@ -1,5 +1,7 @@
 package com.theconnman
 
+import com.madconn.photoplaylists.HomeController;
+
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
