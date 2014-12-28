@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main"/>
-		<title>TheConnMan</title>
+		<meta name="layout" content="semantic"/>
+		<title>Photo Playlists</title>
 	</head>
 	<body>
 		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
+			<h1>Welcome to Photo Playlists</h1>
 		</div>
 	</body>
 </html>
