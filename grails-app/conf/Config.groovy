@@ -13,6 +13,9 @@
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
+def loc = ['../UserConfig.groovy', 'ROOT/Jenkins.groovy'].grep { new File(it).exists() }.first();
+def localConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(new File(loc).toURI().toURL())
+
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
 grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
 grails.mime.types = [ // the first one is the default format
@@ -90,12 +93,12 @@ environments {
     }
     devdeploy {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
+        grails.serverURL = "http://photoplaylists.theconnman.com"
 		s3bucket = 'photoplaylists'
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
+        grails.serverURL = "http://photoplaylists.theconnman.com"
 		s3bucket = 'photoplaylists'
     }
 }
@@ -128,15 +131,33 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.madconn.photo
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.madconn.photoplaylists.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.madconn.photoplaylists.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':								['ROLE_ADMIN'],
+	'/':								['permitAll'],
 	'/index':							['permitAll'],
 	'/index.gsp':						['permitAll'],
 	'/**/js/**':						['permitAll'],
 	'/**/css/**':						['permitAll'],
 	'/**/images/**':					['permitAll'],
 	'/**/favicon.ico':					['permitAll'],
-	'/home/**':							['ROLE_ADMIN'],
+	'/oauth/**':						['permitAll'],
+	'/home/**':							['permitAll'],
 	'/photo/**':						['ROLE_ADMIN'],
 	'/playlist/**':						['ROLE_ADMIN']
 ]
 
+def baseURL = grails.serverURL ?: "http://localhost:${System.getProperty('server.port', '8080')}"
+oauth {
+	debug = true
+	providers {
+		google {
+			api = org.grails.plugin.springsecurity.oauth.GoogleApi20
+			key = localConfig.photoplaylists.oauth.google.key
+			secret = localConfig.photoplaylists.oauth.google.secret
+			successUri = '/oauth/google/success'
+			failureUri = '/oauth/google/failure'
+			callback = "${baseURL}/oauth/google/callback"
+			scope = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
+		}
+	}
+}
+// Added by the Spring Security OAuth plugin:
+grails.plugin.springsecurity.oauth.domainClass = 'com.madconn.photoplaylists.OAuthID'
