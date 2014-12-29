@@ -139,6 +139,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/images/**':					['permitAll'],
 	'/**/favicon.ico':					['permitAll'],
 	'/oauth/**':						['permitAll'],
+	'/springSecurityOAuth/**':			['permitAll'],
 	'/home/**':							['permitAll'],
 	'/photo/**':						['ROLE_ADMIN'],
 	'/playlist/**':						['ROLE_ADMIN']
@@ -161,3 +162,4 @@ oauth {
 }
 // Added by the Spring Security OAuth plugin:
 grails.plugin.springsecurity.oauth.domainClass = 'com.madconn.photoplaylists.OAuthID'
+grails.plugin.springsecurity.oauth.registration.askToLinkOrCreateAccountUri = '/oauth/askToCreateAccount'
