@@ -26,6 +26,18 @@
 				<g:link controller="home" class="item">
 					<i class="home icon"></i> Home
 				</g:link>
+				<sec:ifLoggedIn>
+					<div class="right menu">
+						<div class="ui dropdown item">
+							<sec:username/> <i class="icon dropdown"></i>
+							<div class="menu">
+								<a class="item"><i class="edit icon"></i> Edit Profile</a>
+								<a class="item"><i class="globe icon"></i> Choose Language</a>
+								<a class="item"><i class="settings icon"></i> Account Settings</a>
+							</div>
+						</div>
+					</div>
+				</sec:ifLoggedIn>
 			</div>
 			<g:layoutBody/>
 		</div>
