@@ -140,10 +140,13 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':					['permitAll'],
 	'/oauth/**':						['permitAll'],
 	'/springSecurityOAuth/**':			['permitAll'],
-	'/home/**':							['permitAll'],
+	'/home/**':							['ROLE_USER', 'ROLE_ADMIN'],
+	'/home/landing':					['permitAll'],
 	'/photo/**':						['ROLE_ADMIN'],
 	'/playlist/**':						['ROLE_ADMIN']
 ]
+
+grails.plugin.springsecurity.auth.loginFormUrl = '/landing'
 
 def baseURL = grails.serverURL ?: "http://localhost:${System.getProperty('server.port', '8080')}"
 oauth {
