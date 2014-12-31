@@ -2,7 +2,11 @@ package com.madconn.photoplaylists
 
 class HomeController {
 
-    def index() { }
+	def springSecurityService
+	
+    def index() {
+		[playlists: Playlist.findAllByCreatedBy(springSecurityService.currentUser)]
+	}
 
     def landing() { }
 }
