@@ -21,24 +21,24 @@
 		<div class="ui segment">
 			<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
 		</div>
-		<div style="max-width: 1000px; margin: 0 auto;">
-			<div class="ui menu">
-				<g:link controller="home" class="item">
-					<i class="home icon"></i> Home
-				</g:link>
-				<sec:ifLoggedIn>
+		<div style="max-width: 1000px; margin: 0 auto; padding: 10px;">
+			<sec:ifLoggedIn>
+				<div class="ui menu">
+					<g:link controller="home" class="item">
+						<i class="home icon"></i> Home
+					</g:link>
 					<div class="right menu">
-						<div class="ui dropdown item">
-							<sec:username/> <i class="icon dropdown"></i>
-							<div class="menu">
-								<a class="item"><i class="edit icon"></i> Edit Profile</a>
-								<a class="item"><i class="globe icon"></i> Choose Language</a>
-								<a class="item"><i class="settings icon"></i> Account Settings</a>
+							<div class="ui dropdown item">
+								<sec:username/> <i class="icon dropdown"></i>
+								<div class="menu">
+									<a class="item"><i class="edit icon"></i> Edit Profile</a>
+									<a class="item"><i class="globe icon"></i> Choose Language</a>
+									<a class="item"><i class="settings icon"></i> Account Settings</a>
+								</div>
 							</div>
-						</div>
 					</div>
-				</sec:ifLoggedIn>
-			</div>
+				</div>
+			</sec:ifLoggedIn>
 			<g:layoutBody/>
 		</div>
 		<div class="footer" role="contentinfo"></div>
