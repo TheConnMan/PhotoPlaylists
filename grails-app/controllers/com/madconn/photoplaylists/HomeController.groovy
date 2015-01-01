@@ -5,8 +5,12 @@ class HomeController {
 	def springSecurityService
 	
     def index() {
-		[playlists: Playlist.findAllByCreatedBy(springSecurityService.currentUser)]
+		[menu: menu()]
 	}
 
     def landing() { }
+	
+	Map menu() {
+		[playlists: Playlist.findAllByCreatedBy(springSecurityService.currentUser)]
+	}
 }
