@@ -8,9 +8,9 @@
 		My Playlists
 	</div>
 	<g:each in="${ menu.playlists }">
-		<a class="item">
+		<g:link controller="playlist" action="view" id="${ it.id }" class="item">
 			${ it.name }
-		</a>
+		</g:link>
 	</g:each>
 	<a class="item">
 		<i class="plus icon"></i>

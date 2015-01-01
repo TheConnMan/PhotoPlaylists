@@ -7,7 +7,7 @@ class UrlMappings {
             }
         }
 		
-		"/"(controller:'home')
+		"/"(controller:'playlist',action:'home')
 		"/landing"(controller:'home',action:'landing')
         "/controllers"(view:'/index')
 		'/oauth/askToCreateAccount'(controller: 'springSecurityOAuth', action: 'askToCreateAccount')

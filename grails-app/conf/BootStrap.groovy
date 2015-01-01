@@ -19,15 +19,25 @@ class BootStrap {
 		createUser('admin', 'theconnman', adminRole)
 		createUser('user', 'theconnman', userRole)
 		
-		(1..5).each {
+		(1..5).each { i ->
 			User admin = User.findByUsername('admin');
-			new Playlist(
-				name: 'Playlist ' + it,
+			Playlist p = new Playlist(
+				name: 'Playlist ' + i,
 				createdBy: admin,
 				createdDate: new Date(),
 				lastViewedDate: new Date(),
 				lastEditedDate: new Date()
 			).save()
+			(1..5).each {
+				p.addToPhotos(
+					name: 'Photo ' + it,
+					description: 'Description ' + it,
+					uploadedDate: new Date(),
+					uploadedBy: admin,
+					lastUpdated: new Date(),
+					fileLocation: 'http://placehold.it/350x150'
+				)
+			}
 		}
     }
     def destroy = {
