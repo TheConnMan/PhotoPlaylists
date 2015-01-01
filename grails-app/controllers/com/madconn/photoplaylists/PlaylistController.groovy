@@ -14,6 +14,7 @@ class PlaylistController {
 
 	def scaffold = true
 	
+	@Secured(["ROLE_USER", "ROLE_ADMIN"])
 	def home() {
 		[menu: menu()]
 	}
@@ -21,7 +22,6 @@ class PlaylistController {
 	@Secured(["ROLE_USER", "ROLE_ADMIN"])
 	def view(Long id) {
 		Playlist playlist = Playlist.get(id);
-		println playlist.photos
 		[menu: menu(), playlist: playlist]
 		
 	}
