@@ -12,6 +12,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class PlaylistController {
 	
 	def springSecurityService
+	def AWSService
 
 	def scaffold = true
 	
@@ -43,7 +44,8 @@ class PlaylistController {
 	}
 	
 	def createPhoto() {
-		String loc = 'Location';
+		String loc = new Date().format('yyyy/MM/dd/HH/mm-ss-') + params['photo-file'].getOriginalFilename();
+		AWSService.putPhoto(params['photo-file'].getInputStream(), loc);
 		Photo photo = new Photo(
 			name: params['photo-name'],
 			description: params['photo-description'],
