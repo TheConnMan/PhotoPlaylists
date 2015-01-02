@@ -8,6 +8,8 @@
 		<g:render template="/layouts/menu" model="[menu: menu]" />
 		<div>
 			<h1>${ playlist.name }</h1>
+			<p> Created on ${ playlist.createdDate.format('M/d/yyyy') } by ${ playlist.createdBy } </p>
+			<p>${ playlist.description }</p>
 		<div class="ui five cards">
 		<g:each in="${ playlist.photos }">
 			<div class="ui card">

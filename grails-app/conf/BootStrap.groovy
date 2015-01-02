@@ -23,6 +23,7 @@ class BootStrap {
 			User admin = User.findByUsername('admin');
 			Playlist p = new Playlist(
 				name: 'Playlist ' + i,
+				description: 'Description ' + i,
 				createdBy: admin,
 				createdDate: new Date(),
 				lastViewedDate: new Date(),
