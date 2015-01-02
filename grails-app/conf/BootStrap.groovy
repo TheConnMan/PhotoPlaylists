@@ -35,7 +35,7 @@ class BootStrap {
 					uploadedDate: new Date(),
 					uploadedBy: admin,
 					lastUpdated: new Date(),
-					fileLocation: 'http://placehold.it/350x150'
+					fileLocation: 'http://placehold.it/144x240'
 				)
 			}
 		}
