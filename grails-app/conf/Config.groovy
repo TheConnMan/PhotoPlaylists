@@ -105,23 +105,21 @@ environments {
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
-
-    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
-           'org.codehaus.groovy.grails.web.pages',          // GSP
-           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-           'org.codehaus.groovy.grails.commons',            // core / classloading
-           'org.codehaus.groovy.grails.plugins',            // plugins
-           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
+    appenders {
+		console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n'), threshold: org.apache.log4j.Level.INFO
+		file name: 'file', layout:pattern(conversionPattern: '%d{dd-MM-yyyy HH:mm:ss} %p %c{2} - %m%n'), file: './Log.log', threshold: org.apache.log4j.Level.DEBUG
+    }
+	root {
+		org.apache.log4j.Level.OFF
+	}
+	
+	environments {
+		development {
+			info	stdout:	['com.theconnman', 'grails.app.conf'], additivity: false
+		}
+	}
+    debug	file:	['com.theconnman', 'grails.app.conf'], additivity: false
+	off 'org.grails.plugin.resource.ResourceMeta'
 }
 
 grails.app.context = '/'
