@@ -140,10 +140,12 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':					['permitAll'],
 	'/oauth/**':						['permitAll'],
 	'/springSecurityOAuth/**':			['permitAll'],
-	'/home/**':							['ROLE_USER', 'ROLE_ADMIN'],
 	'/home/landing':					['permitAll'],
-	'/photo/**':						['ROLE_ADMIN'],
-	'/playlist/**':						['ROLE_ADMIN']
+	'/playlist':						['ROLE_ADMIN'],
+	'/playlist/show/**':				['ROLE_ADMIN'],
+	'/playlist/edit/**':				['ROLE_ADMIN'],
+	'/playlist/**':						['ROLE_USER', 'ROLE_ADMIN'],
+	'/photo/**':						['ROLE_ADMIN']
 ]
 
 grails.plugin.springsecurity.auth.loginFormUrl = '/landing'

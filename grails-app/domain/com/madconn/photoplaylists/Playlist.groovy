@@ -12,7 +12,7 @@ class Playlist {
 	static hasMany = [photos: Photo]
 
     static constraints = {
-		name()
+		name unique: 'createdBy'
 		createdBy()
 		createdDate()
 		description nullable: true, maxSize: 1000
