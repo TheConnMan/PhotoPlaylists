@@ -91,6 +91,17 @@
 					<label>Description</label>
 					<g:textArea name="photo-description" />
 				</div>
+				<h2 class="ui header">Add To Playlists</h2>
+				<div class="four fields">
+					<g:each in="${ menu.playlists }">
+						<div class="field">
+							<div class="ui toggle checkbox">
+								<g:checkBox name="playlist-${ it.id }" />
+								<label>${ it.name }</label>
+							</div>
+						</div>
+					</g:each>
+				</div>
 			</div>
 		</g:form>
 	</div>
@@ -109,6 +120,7 @@
 		$('.launch').click(function() {
 			$('.left.sidebar').sidebar('toggle');
 		});
+		$('.ui.checkbox').checkbox();
 	});
 
 	function createPlaylist() {

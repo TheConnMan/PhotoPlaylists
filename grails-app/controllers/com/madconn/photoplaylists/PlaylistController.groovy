@@ -58,6 +58,13 @@ class PlaylistController {
 		if (photo.hasErrors()) {
 			render([success: false] as JSON)
 		} else {
+			Collection<Playlist> playlists = Playlist.findAllByCreatedBy(springSecurityService.currentUser);
+			playlists.each {
+				if (params['playlist-' + it.id] == 'on') {
+					it.addToPhotos(photo);
+					it.save();
+				}
+			}
 			render([success: true] as JSON)
 		}
 	}
