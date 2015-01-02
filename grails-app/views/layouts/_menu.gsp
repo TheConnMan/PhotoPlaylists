@@ -133,21 +133,21 @@
 					if (data.success) {
 						window.location.href = '/playlist/view/' + data.id
 					} else {
-						$('#createPlaylist .form').removeClass('warning');
-						$('#createPlaylist .form').addClass('error');
+						$('.create-playlist .form').removeClass('warning');
+						$('.create-playlist .form').addClass('error');
 					}
 				}
 			});
 		} else {
-			$('#createPlaylist .form').removeClass('error');
-			$('#createPlaylist .form').addClass('warning');
+			$('.create-playlist .form').removeClass('error');
+			$('.create-playlist .form').addClass('warning');
 		}
 	}
 
 	function submitCreatePhoto() {
 		var fd = new FormData($('#photo-form')[0]);
 		if ($('#photo-name').val().length != 0) {
-			$('#createPhoto .form').addClass('loading');
+			$('.create-photo .form').addClass('loading');
 			$.ajax({
 				url: '/playlist/createPhoto',
 				type: 'POST',
@@ -158,17 +158,17 @@
 					if (data.success) {
 						console.log('Success')
 					} else {
-						$('#createPhoto .form').removeClass('warning');
-						$('#createPhoto .form').addClass('error');
+						$('.create-photo .form').removeClass('warning');
+						$('.create-photo .form').addClass('error');
 					}
 				},
 				complete: function() {
-					$('#createPhoto .form').removeClass('loading');
+					$('.create-photo .form').removeClass('loading');
 				}
 			});
 		} else {
-			$('#createPhoto .form').removeClass('error');
-			$('#createPhoto .form').addClass('warning');
+			$('.create-photo .form').removeClass('error');
+			$('.create-photo .form').addClass('warning');
 		}
 	}
 </script>
