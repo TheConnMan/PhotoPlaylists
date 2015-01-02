@@ -13,7 +13,7 @@
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
-def loc = ['../UserConfig.groovy', 'ROOT/Jenkins.groovy'].grep { new File(it).exists() }.first();
+def loc = ['../UserConfig.groovy', 'webapps/ROOT/Jenkins.groovy'].grep { new File(it).exists() }.first();
 def localConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(new File(loc).toURI().toURL())
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
@@ -106,6 +106,7 @@ environments {
 // log4j configuration
 log4j = {
     appenders {
+		'null' name: 'stacktrace'
 		console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n'), threshold: org.apache.log4j.Level.INFO
 		file name: 'file', layout:pattern(conversionPattern: '%d{dd-MM-yyyy HH:mm:ss} %p %c{2} - %m%n'), file: './Log.log', threshold: org.apache.log4j.Level.DEBUG
     }
@@ -115,10 +116,10 @@ log4j = {
 	
 	environments {
 		development {
-			info	stdout:	['com.madconn', 'grails.app.conf'], additivity: false
+			info	stdout:	['com.madconn.photoplaylists', 'grails.app.conf'], additivity: false
 		}
 	}
-    debug	file:	['com.madconn', 'grails.app.conf'], additivity: false
+    debug	file:	['com.madconn.photoplaylists', 'grails.app.conf'], additivity: false
 	off 'org.grails.plugin.resource.ResourceMeta'
 }
 
