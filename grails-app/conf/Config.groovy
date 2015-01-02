@@ -115,10 +115,10 @@ log4j = {
 	
 	environments {
 		development {
-			info	stdout:	['com.theconnman', 'grails.app.conf'], additivity: false
+			info	stdout:	['com.madconn', 'grails.app.conf'], additivity: false
 		}
 	}
-    debug	file:	['com.theconnman', 'grails.app.conf'], additivity: false
+    debug	file:	['com.madconn', 'grails.app.conf'], additivity: false
 	off 'org.grails.plugin.resource.ResourceMeta'
 }
 
