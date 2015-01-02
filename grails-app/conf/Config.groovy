@@ -13,7 +13,7 @@
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
-def loc = ['../UserConfig.groovy', 'ROOT/Jenkins.groovy'].grep { new File(it).exists() }.first();
+def loc = ['../UserConfig.groovy', 'Jenkins.groovy'].grep { new File(it).exists() }.first();
 def localConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(new File(loc).toURI().toURL())
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
