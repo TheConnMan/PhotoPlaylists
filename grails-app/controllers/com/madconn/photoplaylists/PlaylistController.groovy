@@ -36,7 +36,7 @@ class PlaylistController {
 		);
 		playlist.save();
 		if (playlist.hasErrors()) {
-			render([false: true] as JSON)
+			render([success: false] as JSON)
 		} else {
 			render([success: true, id: playlist.id] as JSON)
 		}
