@@ -23,6 +23,7 @@ class BootStrap {
 		(1..5).each { i ->
 			Playlist p = new Playlist(
 				name: 'Playlist ' + i,
+				description: 'Description ' + i,
 				createdBy: admin,
 				createdDate: new Date(),
 				lastViewedDate: new Date(),
@@ -35,7 +36,7 @@ class BootStrap {
 					uploadedDate: new Date(),
 					uploadedBy: admin,
 					lastUpdated: new Date(),
-					fileLocation: 'http://placehold.it/350x150'
+					fileLocation: 'http://placehold.it/144x240'
 				)
 			}
 		}
