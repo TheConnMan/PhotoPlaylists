@@ -23,7 +23,7 @@
 	<a class="item">
 		Browse
 	</a>
-	<a class="item">
+	<a class="item" onclick="createPhoto();">
 		<i class="plus icon"></i>
 		Add A New Photo
 	</a>
@@ -34,7 +34,42 @@
 		Create A New Playlist
 	</div>
 	<div class="content">
-		<g:form>
+		<div class="ui form fluid">
+			<div class="ui warning message">
+				<div class="header">Input Invalid</div>
+				<p>Please enter a name</p>
+			</div>
+			<div class="ui error message">
+				<div class="header">Playlist Already Exists</div>
+				<p>That playlist already exists, please choose a new playlist name</p>
+			</div>
+			<div class="required field">
+				<label>Name</label>
+				<g:field type="text" name="playlist-name" />
+			</div>
+			<div class="field">
+				<label>Description</label>
+				<g:textArea name="playlist-description" />
+			</div>
+		</div>
+	</div>
+	<div class="actions">
+		<div class="ui negative button close">
+			Cancel
+		</div>
+		<div class="ui positive right labeled icon button" onclick="submitCreatePlaylist();">
+			Create
+			<i class="checkmark icon"></i>
+		</div>
+	</div>
+</div>
+<div class="ui modal create-photo">
+	<i class="close icon"></i>
+	<div class="header">
+		Upload A New Photo
+	</div>
+	<div class="content">
+		<g:form name="photo-form">
 			<div class="ui form fluid">
 				<div class="ui warning message">
 					<div class="header">Input Invalid</div>
@@ -42,15 +77,19 @@
 				</div>
 				<div class="ui error message">
 					<div class="header">Playlist Already Exists</div>
-					<p>That playlist already exists, please choose a new playlist name</p>
+					<p>That photo already exists, please choose a new photo name</p>
 				</div>
 				<div class="required field">
 					<label>Name</label>
-					<g:field type="text" name="playlist-name" />
+					<g:field type="text" name="photo-name" />
+				</div>
+				<div class="required field">
+					<label>Photo</label>
+					<g:field type="file" name="photo-file" />
 				</div>
 				<div class="field">
 					<label>Description</label>
-					<g:textArea name="playlist-description" />
+					<g:textArea name="photo-description" />
 				</div>
 			</div>
 		</g:form>
@@ -59,7 +98,7 @@
 		<div class="ui negative button close">
 			Cancel
 		</div>
-		<div class="ui positive right labeled icon button" onclick="submitCreatePlaylist();">
+		<div class="ui positive right labeled icon button" onclick="submitCreatePhoto();">
 			Create
 			<i class="checkmark icon"></i>
 		</div>
@@ -75,6 +114,11 @@
 	function createPlaylist() {
 		$('.left.sidebar').sidebar('toggle');
 		$('.ui.modal.create-playlist').modal({selector: {close: '.close'}}).modal('show');
+	}
+
+	function createPhoto() {
+		$('.left.sidebar').sidebar('toggle');
+		$('.ui.modal.create-photo').modal({selector: {close: '.close'}}).modal('show');
 	}
 
 	function submitCreatePlaylist() {
@@ -97,6 +141,34 @@
 		} else {
 			$('#createPlaylist .form').removeClass('error');
 			$('#createPlaylist .form').addClass('warning');
+		}
+	}
+
+	function submitCreatePhoto() {
+		var fd = new FormData($('#photo-form')[0]);
+		if ($('#photo-name').val().length != 0) {
+			$('#createPhoto .form').addClass('loading');
+			$.ajax({
+				url: '/playlist/createPhoto',
+				type: 'POST',
+				processData: false,
+				contentType: false,
+				data: fd,
+				success: function(data) {
+					if (data.success) {
+						console.log('Success')
+					} else {
+						$('#createPhoto .form').removeClass('warning');
+						$('#createPhoto .form').addClass('error');
+					}
+				},
+				complete: function() {
+					$('#createPhoto .form').removeClass('loading');
+				}
+			});
+		} else {
+			$('#createPhoto .form').removeClass('error');
+			$('#createPhoto .form').addClass('warning');
 		}
 	}
 </script>

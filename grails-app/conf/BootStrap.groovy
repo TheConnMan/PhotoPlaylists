@@ -19,8 +19,8 @@ class BootStrap {
 		createUser('admin', 'theconnman', adminRole)
 		createUser('user', 'theconnman', userRole)
 		
+		User admin = User.findByUsername('admin');
 		(1..5).each { i ->
-			User admin = User.findByUsername('admin');
 			Playlist p = new Playlist(
 				name: 'Playlist ' + i,
 				createdBy: admin,
@@ -30,7 +30,7 @@ class BootStrap {
 			).save()
 			(1..5).each {
 				p.addToPhotos(
-					name: 'Photo ' + it,
+					name: 'Photo ' + i + ' ' + it,
 					description: 'Description ' + it,
 					uploadedDate: new Date(),
 					uploadedBy: admin,

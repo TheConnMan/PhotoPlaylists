@@ -42,6 +42,24 @@ class PlaylistController {
 		}
 	}
 	
+	def createPhoto() {
+		String loc = 'Location';
+		Photo photo = new Photo(
+			name: params['photo-name'],
+			description: params['photo-description'],
+			uploadedBy: springSecurityService.currentUser,
+			uploadedDate: new Date(),
+			lastUpdatedDate: new Date(),
+			fileLocation: loc
+		);
+		photo.save();
+		if (photo.hasErrors()) {
+			render([success: false] as JSON)
+		} else {
+			render([success: true] as JSON)
+		}
+	}
+	
 	Map menu() {
 		[playlists: Playlist.findAllByCreatedBy(springSecurityService.currentUser)]
 	}

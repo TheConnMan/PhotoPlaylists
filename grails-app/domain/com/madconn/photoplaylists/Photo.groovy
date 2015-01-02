@@ -11,7 +11,7 @@ class Photo {
 	String fileLocation
 
     static constraints = {
-		name()
+		name unique: 'uploadedBy'
 		description maxSize: 1000, nullable: true
 		uploadedDate()
 		uploadedBy()
