@@ -145,7 +145,10 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/playlist/show/**':				['ROLE_ADMIN'],
 	'/playlist/edit/**':				['ROLE_ADMIN'],
 	'/playlist/**':						['ROLE_USER', 'ROLE_ADMIN'],
-	'/photo/**':						['ROLE_ADMIN']
+	'/photo':							['ROLE_ADMIN'],
+	'/photo/show/**':					['ROLE_ADMIN'],
+	'/photo/edit/**':					['ROLE_ADMIN'],
+	'/photo/**':						['ROLE_USER', 'ROLE_ADMIN']
 ]
 
 grails.plugin.springsecurity.auth.loginFormUrl = '/landing'
