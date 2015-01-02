@@ -157,6 +157,8 @@
 				success: function(data) {
 					if (data.success) {
 						console.log('Success')
+						$('.ui.modal.create-photo').modal('hide');
+						swal('Success', 'Your photo was successfully uploaded', 'success');
 					} else {
 						$('.create-photo .form').removeClass('warning');
 						$('.create-photo .form').addClass('error');
