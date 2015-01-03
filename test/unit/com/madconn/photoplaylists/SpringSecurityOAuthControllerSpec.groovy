@@ -10,11 +10,14 @@ import spock.lang.Specification
 class SpringSecurityOAuthControllerSpec extends Specification {
 
     def setup() {
+		
     }
 
     def cleanup() {
+		
     }
 
     void "test something"() {
+		
     }
 }

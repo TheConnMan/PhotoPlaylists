@@ -1,4 +1,4 @@
-package com.theconnman
+package com.madconn.photoplaylists
 
 import com.madconn.photoplaylists.HomeController;
 
@@ -12,11 +12,14 @@ import spock.lang.Specification
 class HomeControllerSpec extends Specification {
 
     def setup() {
+		
     }
 
     def cleanup() {
+		
     }
 
     void "test something"() {
+		
     }
 }

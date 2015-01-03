@@ -10,11 +10,14 @@ import spock.lang.Specification
 class PhotoSpec extends Specification {
 
     def setup() {
+		
     }
 
     def cleanup() {
+		
     }
 
     void "test something"() {
+		
     }
 }
