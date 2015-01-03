@@ -47,28 +47,32 @@ class PlaylistController {
 	}
 	
 	def createPhoto() {
-		String loc = new Date().format('yyyy/MM/dd/HH/mm-ss-') + params['photo-file'].getOriginalFilename();
-		AWSService.putPhoto(params['photo-file'].getInputStream(), loc);
-		Photo photo = new Photo(
-			name: params['photo-name'],
-			description: params['photo-description'],
-			uploadedBy: springSecurityService.currentUser,
-			uploadedDate: new Date(),
-			lastUpdatedDate: new Date(),
-			fileLocation: loc
-		);
-		photo.save();
-		if (photo.hasErrors()) {
-			render([success: false] as JSON)
+		if (!params['photo-file'] || !params['photo-name']) {
+			render([success: false, error: 'Please choose a file and a name.'] as JSON);
 		} else {
-			Collection<Playlist> playlists = Playlist.findAllByCreatedBy(springSecurityService.currentUser());
-			playlists.each {
-				if (params['playlist-' + it.id] == 'on') {
-					it.addToPhotos(photo);
-					it.save();
+			String loc = new Date().format('yyyy/MM/dd/HH/mm-ss-') + params['photo-file'].getOriginalFilename();
+			AWSService.putPhoto(params['photo-file'].getInputStream(), loc);
+			Photo photo = new Photo(
+				name: params['photo-name'],
+				description: params['photo-description'],
+				uploadedBy: springSecurityService.currentUser,
+				uploadedDate: new Date(),
+				lastUpdatedDate: new Date(),
+				fileLocation: loc
+			);
+			photo.save();
+			if (photo.hasErrors()) {
+				render([success: false] as JSON)
+			} else {
+				Collection<Playlist> playlists = Playlist.findAllByCreatedBy(springSecurityService.currentUser);
+				playlists.each {
+					if (params['playlist-' + it.id] == 'on') {
+						it.addToPhotos(photo);
+						it.save();
+					}
 				}
+				render([success: true] as JSON)
 			}
-			render([success: true] as JSON)
 		}
 	}
 	

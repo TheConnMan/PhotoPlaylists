@@ -1,16 +1,27 @@
 package com.madconn.photoplaylists
 
 import grails.test.mixin.TestFor
+import org.springframework.mock.web.MockMultipartFile
 import spock.lang.*
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.converters.JSON
 
 @TestFor(PlaylistController)
-@Mock([Playlist, User])
+@Mock([Playlist, User, Photo])
 class PlaylistControllerSpec extends Specification {
 	
-	def populateValidParams() {
+	def populateValidPlaylistParams() {
 		params.name = 'Test';
+	}
+	
+	def populateValidPhotoParams() {
+		params['photo-name'] = 'Test';
+		params['photo-file'] = new MockMultipartFile(
+			'Test File',
+			'Original Name',
+			'image/png',
+			(byte[])[]
+		);
 	}
 	
 	def createPlaylist() {
@@ -51,19 +62,42 @@ class PlaylistControllerSpec extends Specification {
 		given:
 			controller.springSecurityService = [currentUser: getUser()];
 		
-		when:"request contains invalid params"
+		when:"Request contains invalid params"
 			controller.createPlaylist();
 		
 		then:"Success is false"
 			!JSON.parse(response.text).success;
 		
-		when:"request contains valid params"
+		when:"Request contains valid params"
 			response.reset();
-			populateValidParams();
+			populateValidPlaylistParams();
 			controller.createPlaylist();
 		
 		then:"Success is true"
 			JSON.parse(response.text).success;
 			JSON.parse(response.text).id != null;
+	}
+	
+	void "create photo returns correct results"() {
+		given:
+			controller.springSecurityService = [currentUser: getUser()];
+			def mockAWSService = mockFor(AWSService);
+			mockAWSService.demand.putPhoto { InputStream i, String loc ->  };
+			controller.AWSService = mockAWSService.createMock();
+		
+		when:"Request contains no params"
+			controller.createPhoto();
+		
+		then:"Success is false"
+			!JSON.parse(response.text).success;
+			JSON.parse(response.text).error != null;
+		
+		when:"Request contains valid params"
+			response.reset();
+			populateValidPhotoParams();
+			controller.createPhoto();
+		
+		then:"Success is true"
+			JSON.parse(response.text).success;
 	}
 }
