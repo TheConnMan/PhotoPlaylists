@@ -11,15 +11,19 @@ import spock.lang.Specification
 @TestFor(HomeController)
 class HomeControllerSpec extends Specification {
 
-    def setup() {
+    void "test index page"() {
+		when:"Index is requested"
+			controller.index();
 		
+		then:"Response 200"
+			response.status == 200;
     }
 
-    def cleanup() {
+    void "test landing page"() {
+		when:"Landing is requested"
+			controller.landing();
 		
-    }
-
-    void "test something"() {
-		
+		then:"Response 200"
+			response.status == 200;
     }
 }

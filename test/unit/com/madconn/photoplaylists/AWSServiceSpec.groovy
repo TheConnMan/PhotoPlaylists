@@ -9,15 +9,5 @@ import spock.lang.Specification
 @TestFor(AWSService)
 class AWSServiceSpec extends Specification {
 
-    def setup() {
-		
-    }
-
-    def cleanup() {
-		
-    }
-
-    void "test something"() {
-		
-    }
+	
 }

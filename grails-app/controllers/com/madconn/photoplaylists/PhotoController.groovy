@@ -12,7 +12,11 @@ class PhotoController {
 	
 	def view(Long id) {
 		Photo photo = Photo.get(id);
-		Map obj = AWSService.getPhoto(photo);
-		render file: obj.stream, contentType: obj.type
+		if (photo) {
+			Map obj = AWSService.getPhoto(photo);
+			render file: obj.stream, contentType: obj.type
+		} else {
+			response.status = 404;
+		}
 	}
 }

@@ -20,7 +20,7 @@ class PlaylistControllerSpec extends Specification {
 			'Test File',
 			'Original Name',
 			'image/png',
-			(byte[])[]
+			'Contents'.bytes
 		);
 	}
 	
