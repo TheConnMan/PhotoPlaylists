@@ -45,11 +45,11 @@
 			</div>
 			<div class="required field">
 				<label>Name</label>
-				<g:field type="text" name="playlist-name" />
+				<g:field type="text" name="playlist-name" class="text" />
 			</div>
 			<div class="field">
 				<label>Description</label>
-				<g:textArea name="playlist-description" />
+				<g:textArea name="playlist-description" class="text" />
 			</div>
 		</div>
 	</div>
@@ -81,22 +81,22 @@
 				</div>
 				<div class="required field">
 					<label>Name</label>
-					<g:field type="text" name="photo-name" />
+					<g:field type="text" name="photo-name" class="text" />
 				</div>
 				<div class="required field">
 					<label>Photo</label>
-					<g:field type="file" name="photo-file" />
+					<g:field type="file" name="photo-file" class="text" />
 				</div>
 				<div class="field">
 					<label>Description</label>
-					<g:textArea name="photo-description" />
+					<g:textArea name="photo-description" class="text" />
 				</div>
 				<h2 class="ui header">Add To Playlists</h2>
 				<div class="four fields">
 					<g:each in="${ menu.playlists }">
 						<div class="field">
 							<div class="ui toggle checkbox">
-								<g:checkBox name="playlist-${ it.id }" />
+								<g:checkBox name="playlist-${ it.id }" class="checkbox" />
 								<label>${ it.name }</label>
 							</div>
 						</div>
@@ -125,11 +125,14 @@
 
 	function createPlaylist() {
 		$('.left.sidebar').sidebar('toggle');
+		$('.create-photo .text').val('');
 		$('.ui.modal.create-playlist').modal({selector: {close: '.close'}}).modal('show');
 	}
 
 	function createPhoto() {
 		$('.left.sidebar').sidebar('toggle');
+		$('.create-photo .text').val('');
+		$('.create-photo .checkbox').attr('checked', false);
 		$('.ui.modal.create-photo').modal({selector: {close: '.close'}}).modal('show');
 	}
 
