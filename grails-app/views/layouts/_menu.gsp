@@ -4,6 +4,24 @@
 </div>
 <div class="ui left inverted vertical sidebar menu">
 	<div class="header item">
+		<i class="user icon"></i>
+		<sec:username />
+	</div>
+	<g:link controller="logout" class="item">
+		Logout
+	</g:link>
+	<div class="header item">
+		<i class="photo icon"></i>
+		My Photos
+	</div>
+	<a class="item">
+		Browse
+	</a>
+	<a class="item" onclick="createPhoto();">
+		<i class="plus icon"></i>
+		Add A New Photo
+	</a>
+	<div class="header item">
 		<i class="list icon"></i>
 		My Playlists
 	</div>
@@ -15,17 +33,6 @@
 	<a class="item" onclick="createPlaylist();">
 		<i class="plus icon"></i>
 		Create A New Playlist
-	</a>
-	<div class="header item">
-		<i class="photo icon"></i>
-		My Photos
-	</div>
-	<a class="item">
-		Browse
-	</a>
-	<a class="item" onclick="createPhoto();">
-		<i class="plus icon"></i>
-		Add A New Photo
 	</a>
 </div>
 <div class="ui modal create-playlist">
@@ -146,7 +153,7 @@
 				},
 				success: function(data) {
 					if (data.success) {
-						window.location.href = '/playlist/view/' + data.id
+						window.location.href = '/playlist/view/' + data.id;
 					} else {
 						$('.create-playlist .form').removeClass('warning');
 						$('.create-playlist .form').addClass('error');

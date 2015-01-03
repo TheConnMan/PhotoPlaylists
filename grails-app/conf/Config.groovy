@@ -151,6 +151,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 grails.plugin.springsecurity.auth.loginFormUrl = '/landing'
+grails.plugin.springsecurity.logout.postOnly = false
 
 def baseURL = grails.serverURL ?: "http://localhost:${System.getProperty('server.port', '8080')}"
 oauth {
