@@ -33,7 +33,7 @@ class PlaylistController {
 		Playlist playlist = new Playlist(
 			name: params.name,
 			description: params.description,
-			createdBy: springSecurityService.currentUser(),
+			createdBy: springSecurityService.currentUser,
 			createdDate: new Date(),
 			lastViewedDate: new Date(),
 			lastEditedDate: new Date()
@@ -52,7 +52,7 @@ class PlaylistController {
 		Photo photo = new Photo(
 			name: params['photo-name'],
 			description: params['photo-description'],
-			uploadedBy: springSecurityService.currentUser(),
+			uploadedBy: springSecurityService.currentUser,
 			uploadedDate: new Date(),
 			lastUpdatedDate: new Date(),
 			fileLocation: loc
@@ -73,6 +73,6 @@ class PlaylistController {
 	}
 	
 	Map menu() {
-		[playlists: Playlist.findAllByCreatedBy(springSecurityService.currentUser())]
+		[playlists: Playlist.findAllByCreatedBy(springSecurityService.currentUser)]
 	}
 }
