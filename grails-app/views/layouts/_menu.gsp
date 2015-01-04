@@ -98,7 +98,7 @@
 					<label>Description</label>
 					<g:textArea name="photo-description" class="text" />
 				</div>
-				<h2 class="ui header">Add To Playlists</h2>
+				<h2 class="ui header">Add to Playlists</h2>
 				<div class="four fields">
 					<g:each in="${ menu.playlists }">
 						<div class="field">

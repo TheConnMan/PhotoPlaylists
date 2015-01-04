@@ -18,7 +18,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="ui bottom attached button">
+	<div class="ui bottom attached button" onclick="editPhoto(${ photo.id });">
 		<i class="edit icon"></i> Edit
 	</div>
 </div>
+
+

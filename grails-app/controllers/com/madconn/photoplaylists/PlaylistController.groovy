@@ -76,6 +76,18 @@ class PlaylistController {
 		}
 	}
 	
+	def editPhoto() {
+		Photo photo = Photo.get(params.id);
+		if (!photo || !params.name) {
+			render([success: false] as JSON)
+		} else {
+			photo.name = params.name;
+			photo.description = params.description;
+			photo.save();
+			render([success: true] as JSON)
+		}
+	}
+	
 	Map menu() {
 		[playlists: Playlist.findAllByCreatedBy(springSecurityService.currentUser)]
 	}
