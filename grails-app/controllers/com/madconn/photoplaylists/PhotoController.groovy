@@ -7,7 +7,8 @@ import grails.transaction.Transactional
 class PhotoController {
 	
 	def AWSService
-
+	def springSecurityService
+	
     def scaffold = true
 	
 	def view(Long id) {
@@ -18,5 +19,9 @@ class PhotoController {
 		} else {
 			response.status = 404;
 		}
+	}
+	
+	def browse() {
+		[menu: new PlaylistController().menu(), allPhotos: Photo.findAllByUploadedBy(springSecurityService.currentUser)]
 	}
 }

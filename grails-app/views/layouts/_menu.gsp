@@ -2,7 +2,7 @@
 	<i class="content icon"></i>
 	<span class="text">Menu</span>
 </div>
-<div class="ui left inverted vertical sidebar menu">
+<div class="ui inverted left vertical sidebar menu">
 	<div class="header item">
 		<i class="user icon"></i>
 		<sec:username />
@@ -14,12 +14,12 @@
 		<i class="photo icon"></i>
 		My Photos
 	</div>
-	<a class="item">
+	<g:link controller="photo" action="browse" class="item">
 		Browse
-	</a>
+	</g:link>
 	<a class="item" onclick="createPhoto();">
 		<i class="plus icon"></i>
-		Add A New Photo
+		Add a New Photo
 	</a>
 	<div class="header item">
 		<i class="list icon"></i>
@@ -32,13 +32,13 @@
 	</g:each>
 	<a class="item" onclick="createPlaylist();">
 		<i class="plus icon"></i>
-		Create A New Playlist
+		Create a New Playlist
 	</a>
 </div>
 <div class="ui modal create-playlist">
 	<i class="close icon"></i>
 	<div class="header">
-		Create A New Playlist
+		Create a New Playlist
 	</div>
 	<div class="content">
 		<div class="ui form fluid">
