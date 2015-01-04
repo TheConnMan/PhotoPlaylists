@@ -7,6 +7,9 @@ import com.madconn.photoplaylists.UserRole
 
 class BootStrap {
 	
+	def grailsApplication
+	def AWSService
+	
 	def createUser(name, password, role) {
 		def me = new User(username: name, password: password, enabled: true).save()
 		UserRole.create(me, role, true)
@@ -20,6 +23,9 @@ class BootStrap {
 		createUser('user', 'theconnman', userRole)
 		
 		User admin = User.findByUsername('admin');
+		File file = grailsApplication.mainContext.getResource('images/Orion_Launch.jpg').file;
+		String loc = new Date().format('yyyy/MM/dd/HH/mm-ss-') + 'Test.jpg';
+		AWSService.putPhoto(file.newInputStream(), loc);
 		(1..5).each { i ->
 			Playlist p = new Playlist(
 				name: 'Playlist ' + i,
@@ -36,7 +42,7 @@ class BootStrap {
 					uploadedDate: new Date(),
 					uploadedBy: admin,
 					lastUpdated: new Date(),
-					fileLocation: 'http://placehold.it/144x240'
+					fileLocation: loc
 				)
 			}
 		}
