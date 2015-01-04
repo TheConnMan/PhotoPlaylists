@@ -5,21 +5,11 @@
 		<title>Photo Playlists</title>
 	</head>
 	<body>
-		<g:render template="/layouts/menu" model="[menu: menu]" />
-		<div>
+		<div class="ui segment">
 			<h1>${ playlist.name }</h1>
-			<p> Created on ${ playlist.createdDate.format('M/d/yyyy') } by ${ playlist.createdBy } </p>
+			<p>Created on ${ playlist.createdDate.format('M/d/yyyy') } by ${ playlist.createdBy }</p>
 			<p>${ playlist.description }</p>
 			<g:render template="/layouts/photoList" model="[photos: playlist.photos, rowSize: 'five']" />
-	</div>
-	<script> 
-		$(function() {
-			$('.ui.card .image')
-			  .dimmer({
-			    on: 'hover'
-			  })
-			;	
-		})
-	</script>
+		</div>
 	</body>
 </html>

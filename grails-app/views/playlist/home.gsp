@@ -5,8 +5,7 @@
 		<title>Photo Playlists</title>
 	</head>
 	<body>
-		<g:render template="/layouts/menu" model="[menu: menu]" />
-		<div>
+		<div class="ui segment">
 			<h1>Welcome to Photo Playlists</h1>
 		</div>
 	</body>

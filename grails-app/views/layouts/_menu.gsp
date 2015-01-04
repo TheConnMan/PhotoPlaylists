@@ -1,8 +1,4 @@
-<div class="ui black big launch right attached fixed button">
-	<i class="content icon"></i>
-	<span class="text">Menu</span>
-</div>
-<div class="ui inverted left vertical sidebar menu">
+<div class="ui inverted left vertical sidebar menu uncover visible">
 	<div class="header item">
 		<i class="user icon"></i>
 		<sec:username />
@@ -124,20 +120,15 @@
 </div>
 <script>
 	$(function() {
-		$('.launch').click(function() {
-			$('.left.sidebar').sidebar('toggle');
-		});
 		$('.ui.checkbox').checkbox();
 	});
 
 	function createPlaylist() {
-		$('.left.sidebar').sidebar('toggle');
 		$('.create-photo .text').val('');
 		$('.ui.modal.create-playlist').modal({selector: {close: '.close'}}).modal('show');
 	}
 
 	function createPhoto() {
-		$('.left.sidebar').sidebar('toggle');
 		$('.create-photo .text').val('');
 		$('.create-photo .checkbox').attr('checked', false);
 		$('.ui.modal.create-photo').modal({selector: {close: '.close'}}).modal('show');

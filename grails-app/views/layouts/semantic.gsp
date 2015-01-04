@@ -21,10 +21,21 @@
 		<r:layoutResources />
 	</head>
 	<body>
-		<div class="ui segment">
-			<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
-		</div>
-		<g:layoutBody/>
+		<sec:ifLoggedIn>
+			<g:render template="/layouts/menu" model="[menu: menu]" />
+			<div class="menu-content">
+				<div class="ui segment">
+					<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
+				</div>
+				<g:layoutBody/>
+			</div>
+		</sec:ifLoggedIn>
+		<sec:ifNotLoggedIn>
+			<div class="ui segment">
+				<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
+			</div>
+			<g:layoutBody/>
+		</sec:ifNotLoggedIn>
 		<div class="footer"></div>
 		<r:layoutResources />
 	</body>
