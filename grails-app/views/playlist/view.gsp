@@ -14,7 +14,7 @@
 		<g:each in="${ playlist.photos }">
 			<div class="ui card">
 				<div class="image" id="my-image">
-					<img src="${ it.fileLocation }" />
+					<img src="/photo/view/${ it.id }" />
 					<div class="ui dimmer">
 						<div class="content">
 							<div class="center" style="text-align: left; vertical-align: top; padding: 10px">
