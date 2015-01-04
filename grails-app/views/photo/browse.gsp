@@ -5,10 +5,9 @@
 		<title>Photo Playlists</title>
 	</head>
 	<body>
-		<g:render template="/layouts/menu" model="[menu: menu]" />
-		<div>
+		<div class="ui segment">
 			<h1>My Photos</h1>
-		<g:render template="/layouts/photoList" model="[photos: allPhotos, rowSize: 'five']" />
-	</div>
+			<g:render template="/layouts/photoList" model="[photos: allPhotos, rowSize: 'five']" />
+		</div>
 	</body>
 </html>
