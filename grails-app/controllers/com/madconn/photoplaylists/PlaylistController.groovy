@@ -84,7 +84,12 @@ class PlaylistController {
 			photo.name = params.name;
 			photo.description = params.description;
 			photo.save();
+			if (photo.hasErrors()) {
+				println 'Error'
+				render([success: false] as JSON)
+			} else {
 			render([success: true] as JSON)
+			}
 		}
 	}
 	
