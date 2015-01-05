@@ -10,7 +10,7 @@
 		Edit This Photo
 	</div>
 	<div class="content">
-		<g:form name="photo-form">
+		<g:form name="photo-edit-form">
 			<div class="ui form fluid">
 				<div class="ui warning message">
 					<div class="header">Input Invalid</div>
