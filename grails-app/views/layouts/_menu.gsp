@@ -44,7 +44,7 @@
 			</div>
 			<div class="ui error message">
 				<div class="header">Playlist Already Exists</div>
-				<p>That playlist already exists, please choose a new playlist name</p>
+				<p id="playlist-error"></p>
 			</div>
 			<div class="required field">
 				<label>Name</label>
@@ -79,8 +79,8 @@
 					<p>Please enter a name</p>
 				</div>
 				<div class="ui error message">
-					<div class="header">Playlist Already Exists</div>
-					<p>That photo already exists, please choose a new photo name</p>
+					<div class="header">Error Creating Photo</div>
+					<p id="photo-error"></p>
 				</div>
 				<div class="required field">
 					<label>Name</label>
@@ -124,11 +124,15 @@
 	});
 
 	function createPlaylist() {
+		$('.create-playlist .form').removeClass('warning');
+		$('.create-playlist .form').removeClass('error');
 		$('.create-photo .text').val('');
 		$('.ui.modal.create-playlist').modal({selector: {close: '.close'}}).modal('show');
 	}
 
 	function createPhoto() {
+		$('.create-photo .form').removeClass('warning');
+		$('.create-photo .form').removeClass('error');
 		$('.create-photo .text').val('');
 		$('.create-photo .checkbox').attr('checked', false);
 		$('.ui.modal.create-photo').modal({selector: {close: '.close'}}).modal('show');
@@ -146,6 +150,7 @@
 					if (data.success) {
 						window.location.href = '/playlist/view/' + data.id;
 					} else {
+						$('#playlist-error').html(data.error);
 						$('.create-playlist .form').removeClass('warning');
 						$('.create-playlist .form').addClass('error');
 					}
@@ -173,6 +178,7 @@
 						$('.ui.modal.create-photo').modal('hide');
 						swal('Success', 'Your photo was successfully uploaded', 'success');
 					} else {
+						$('#photo-error').html(data.error);
 						$('.create-photo .form').removeClass('warning');
 						$('.create-photo .form').addClass('error');
 					}

@@ -40,14 +40,14 @@ class PlaylistController {
 		);
 		playlist.save();
 		if (playlist.hasErrors()) {
-			render([success: false] as JSON)
+			render([success: false, error: 'Please choose a unique playlist name.'] as JSON)
 		} else {
 			render([success: true, id: playlist.id] as JSON)
 		}
 	}
 	
 	def createPhoto() {
-		if (!params['photo-file'] || !params['photo-name']) {
+		if (!params['photo-file'].getOriginalFilename() || !params['photo-name']) {
 			render([success: false, error: 'Please choose a file and a name.'] as JSON);
 		} else {
 			String loc = new Date().format('yyyy/MM/dd/HH/mm-ss-') + params['photo-file'].getOriginalFilename();
@@ -62,7 +62,7 @@ class PlaylistController {
 			);
 			photo.save();
 			if (photo.hasErrors()) {
-				render([success: false] as JSON)
+				render([success: false, error: 'Please choose a unique photo name.'] as JSON)
 			} else {
 				Collection<Playlist> playlists = Playlist.findAllByCreatedBy(springSecurityService.currentUser);
 				playlists.each {
