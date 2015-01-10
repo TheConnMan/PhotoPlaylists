@@ -31,14 +31,14 @@
 				<g:field type="hidden" name="photo-edit-id" />
 				<h2 class="ui header">Add to Playlists</h2>
 				<div class="four fields">
-					<g:each in="${ menu.playlists }">
+					<pp:eachPlaylist>
 						<div class="field">
 							<div class="ui toggle checkbox">
 								<g:checkBox name="playlist-edit-${ it.id }" class="checkbox" />
 								<label>${ it.name }</label>
 							</div>
 						</div>
-					</g:each>
+					</pp:eachPlaylist>
 				</div>
 			</div>
 		</g:form>

@@ -21,11 +21,11 @@
 		<i class="list icon"></i>
 		My Playlists
 	</div>
-	<g:each in="${ menu.playlists }">
+	<pp:eachPlaylist>
 		<g:link controller="playlist" action="view" id="${ it.id }" class="item">
 			${ it.name }
 		</g:link>
-	</g:each>
+	</pp:eachPlaylist>
 	<a class="item" onclick="createPlaylist();">
 		<i class="plus icon"></i>
 		Create a New Playlist
@@ -96,14 +96,14 @@
 				</div>
 				<h2 class="ui header">Add to Playlists</h2>
 				<div class="four fields">
-					<g:each in="${ menu.playlists }">
+					<pp:eachPlaylist>
 						<div class="field">
 							<div class="ui toggle checkbox">
 								<g:checkBox name="playlist-${ it.id }" class="checkbox" />
 								<label>${ it.name }</label>
 							</div>
 						</div>
-					</g:each>
+					</pp:eachPlaylist>
 				</div>
 			</div>
 		</g:form>

@@ -22,6 +22,6 @@ class PhotoController {
 	}
 	
 	def browse() {
-		[menu: new PlaylistController().menu(), allPhotos: Photo.findAllByUploadedBy(springSecurityService.currentUser)]
+		[allPhotos: Photo.findAllByUploadedBy(springSecurityService.currentUser)]
 	}
 }

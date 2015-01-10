@@ -16,14 +16,12 @@ class PlaylistController {
 
 	def scaffold = true
 	
-	def home() {
-		[menu: menu()]
-	}
+	def home() { }
 	
 	def view(Long id) {
 		Playlist playlist = Playlist.get(id);
 		if (playlist) {
-			[menu: menu(), playlist: playlist]
+			[playlist: playlist]
 		} else {
 			response.status = 404;
 		}
@@ -90,9 +88,5 @@ class PlaylistController {
 				render([success: true] as JSON)
 			}
 		}
-	}
-	
-	Map menu() {
-		[playlists: Playlist.findAllByCreatedBy(springSecurityService.currentUser)]
 	}
 }
