@@ -82,17 +82,29 @@
 					<div class="header">Error Creating Photo</div>
 					<p id="photo-error"></p>
 				</div>
-				<div class="required field">
-					<label>Name</label>
-					<g:field type="text" name="photo-name" class="text" />
-				</div>
-				<div class="required field">
-					<label>Photo</label>
-					<g:field type="file" name="photo-file" class="text" />
-				</div>
 				<div class="field">
-					<label>Description</label>
-					<g:textArea name="photo-description" class="text" />
+					<div class="ui toggle checkbox">
+						<g:checkBox name="multiple-photos-on" class="checkbox" />
+						<label>Multiple Photos</label>
+					</div>
+				</div>
+				<div id="multiple-photo" class="field" style="display: none;">
+					<label>Photos</label>
+					<g:field type="file" name="photo-file-multiple" class="text" multiple="true" />
+				</div>
+				<div id="single-photo">
+					<div class="field">
+						<label>Name</label>
+						<g:field type="text" name="photo-name" class="text" />
+					</div>
+					<div class="field">
+						<label>Photo</label>
+						<g:field type="file" name="photo-file" class="text" />
+					</div>
+					<div class="field">
+						<label>Description</label>
+						<g:textArea name="photo-description" class="text" />
+					</div>
 				</div>
 				<h2 class="ui header">Add to Playlists</h2>
 				<div class="four fields">
@@ -121,6 +133,11 @@
 <script>
 	$(function() {
 		$('.ui.checkbox').checkbox();
+		$('#multiple-photos-on').change(function() {
+			var multipleOn = $('#multiple-photos-on').is(':checked');
+			$('#' + (multipleOn ? 'multiple' : 'single') + '-photo').show();
+			$('#' + (multipleOn ? 'single' : 'multiple') + '-photo').hide();
+		});
 	});
 
 	function createPlaylist() {
@@ -164,32 +181,31 @@
 
 	function submitCreatePhoto() {
 		var fd = new FormData($('#photo-form')[0]);
-		if ($('#photo-name').val().length != 0) {
-			$('.create-photo .form').addClass('loading');
-			$.ajax({
-				url: '/playlist/createPhoto',
-				type: 'POST',
-				processData: false,
-				contentType: false,
-				data: fd,
-				success: function(data) {
-					if (data.success) {
-						console.log('Success')
-						$('.ui.modal.create-photo').modal('hide');
-						swal('Success', 'Your photo was successfully uploaded', 'success');
-					} else {
-						$('#photo-error').html(data.error);
-						$('.create-photo .form').removeClass('warning');
-						$('.create-photo .form').addClass('error');
-					}
-				},
-				complete: function() {
-					$('.create-photo .form').removeClass('loading');
-				}
-			});
-		} else {
-			$('.create-photo .form').removeClass('error');
-			$('.create-photo .form').addClass('warning');
+		var files = document.getElementById('photo-file-multiple').files;
+		for (var i = 0; i < files.length; i++) {
+			fd.append('file-photo-' + i, files[i], files[i].name);
 		}
+		$('.create-photo .form').addClass('loading');
+		$.ajax({
+			url: '/playlist/createPhoto',
+			type: 'POST',
+			processData: false,
+			contentType: false,
+			data: fd,
+			success: function(data) {
+				if (data.success) {
+					console.log('Success')
+					$('.ui.modal.create-photo').modal('hide');
+					swal('Success', 'Your photo was successfully uploaded', 'success');
+				} else {
+					$('#photo-error').html(data.error);
+					$('.create-photo .form').removeClass('warning');
+					$('.create-photo .form').addClass('error');
+				}
+			},
+			complete: function() {
+				$('.create-photo .form').removeClass('loading');
+			}
+		});
 	}
 </script>
