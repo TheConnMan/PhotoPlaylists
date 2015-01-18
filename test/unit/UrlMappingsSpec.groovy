@@ -7,7 +7,7 @@ import spock.lang.Specification
 @Mock([HomeController, PlaylistController])
 class UrlMappingsSpec extends Specification {
 
-	void "test forward mappings"() {
+	void "test url mappings"() {
 		expect:
 			assertUrlMapping("/", controller: 'playlist', action: "home")
 			assertUrlMapping("/landing", controller: 'home', action: "landing")

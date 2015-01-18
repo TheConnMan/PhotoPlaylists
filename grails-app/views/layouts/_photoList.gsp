@@ -48,7 +48,7 @@
 			Cancel
 		</div>
 		<div class="ui positive right labeled icon button" onclick="submitEditPhoto();">
-			Save
+			Save 
 			<i class="checkmark icon"></i>
 		</div>
 	</div>
