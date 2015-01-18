@@ -72,11 +72,11 @@
 			},
 			success: function(data) {
 				if (data.success) {
-					$('.edit-photo input.checkbox').attr('checked', false);
+					$('.edit-photo .ui.checkbox').checkbox('uncheck');
 					$('.edit-photo input.checkbox').toArray().forEach(function(d) {
 						var id = parseInt($(d).attr('id').split('-')[2]);
 						if (data.ids.indexOf(id) != -1) {
-							$(d).attr('checked', true);
+							$(d).parent().checkbox('check');
 						}
 					})
 					$('.ui.modal.edit-photo').modal({selector: {close: '.close'}}).modal('show');
