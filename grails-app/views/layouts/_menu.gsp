@@ -14,7 +14,7 @@
 		Browse
 	</g:link>
 	<a class="item" onclick="createPhoto();">
-		<i class="plus icon"></i>
+		<i class="plus teal icon"></i>
 		Add a New Photo
 	</a>
 	<div class="header item">
@@ -27,7 +27,7 @@
 		</g:link>
 	</pp:eachPlaylist>
 	<a class="item" onclick="createPlaylist();">
-		<i class="plus icon"></i>
+		<i class="plus teal icon"></i>
 		Create a New Playlist
 	</a>
 </div>

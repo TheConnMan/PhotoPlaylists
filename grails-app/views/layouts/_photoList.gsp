@@ -65,7 +65,26 @@
 		$('.edit-photo .photo-name').val(photoMap[id].name);
 		$('.edit-photo .photo-description').val(photoMap[id].description);
 		$('#photo-edit-id').val(id);
-		$('.ui.modal.edit-photo').modal({selector: {close: '.close'}}).modal('show');
+		$.ajax({
+			url: '/playlist/getPlaylistsOfPhoto',
+			data: {
+				id: id
+			},
+			success: function(data) {
+				if (data.success) {
+					$('.edit-photo input.checkbox').attr('checked', false);
+					$('.edit-photo input.checkbox').toArray().forEach(function(d) {
+						var id = parseInt($(d).attr('id').split('-')[2]);
+						if (data.ids.indexOf(id) != -1) {
+							$(d).attr('checked', true);
+						}
+					})
+					$('.ui.modal.edit-photo').modal({selector: {close: '.close'}}).modal('show');
+				} else {
+					console.log('Error')
+				}
+			}
+		});
 	}
 
 	function submitEditPhoto() {
