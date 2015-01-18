@@ -90,12 +90,21 @@
 	function submitEditPhoto() {
 		if ($('#photo-edit-name').val().length != 0) {
 			$('.edit-photo .form').addClass('loading');
+			var playlists = $('.edit-photo input.checkbox').toArray().map(function(d) {
+				var id = parseInt($(d).attr('id').split('-')[2]);
+				return {
+					id: id,
+					checked: $(d).is(':checked')
+				}
+			});
 			$.ajax({
 				url: '/playlist/editPhoto',
 				data: {
 					name: $('#photo-edit-name').val(),
 					description: $('#photo-edit-description').val(),
-					id: $('#photo-edit-id').val()
+					id: $('#photo-edit-id').val(),
+					playlists: JSON.stringify(playlists)
+					
 				},
 				success: function(data) {
 					if (data.success) {
