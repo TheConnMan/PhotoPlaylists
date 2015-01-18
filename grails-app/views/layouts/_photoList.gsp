@@ -111,6 +111,8 @@
 						console.log('Success')
 						$('.ui.modal.edit-photo').modal('hide');
 						swal('Success', 'Your photo was successfully updated', 'success');
+						$('#photo-' + $('#photo-edit-id').val() + ' .photo-name').html($('#photo-edit-name').val())
+						$('#photo-' + $('#photo-edit-id').val() + ' .photo-description').html($('#photo-edit-description').val())
 					} else {
 						$('.edit-photo .form').removeClass('warning');
 						$('.edit-photo .form').addClass('error');

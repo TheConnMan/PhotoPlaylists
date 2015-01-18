@@ -98,6 +98,7 @@ class PlaylistController {
 		} else {
 			photo.name = params.name;
 			photo.description = params.description;
+			photo.lastUpdated = new Date();
 			playlistsMap.each {
 				Playlist playlist = Playlist.get(it.id);
 				if (it.checked){

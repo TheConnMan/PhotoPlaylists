@@ -1,14 +1,14 @@
 <div class="ui card">
-	<div class="image" id="my-image">
+	<div class="image" id="photo-${ photo.id }">
 		<img src="/photo/view/${ photo.id }" />
 		<div class="ui dimmer">
 			<div class="content">
 				<div class="center"
 					style="text-align: left; vertical-align: top; padding: 10px">
-					<h2>
+					<h2 class="photo-name">
 						${ photo.name }
 					</h2>
-					<p>
+					<p class = "photo-description">
 						${ photo.description }
 					</p>
 					<p class="date">
