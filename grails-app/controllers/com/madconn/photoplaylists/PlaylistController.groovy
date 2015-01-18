@@ -92,17 +92,45 @@ class PlaylistController {
 	
 	def editPhoto() {
 		Photo photo = Photo.get(params.id);
+		Collection<Map> playlistsMap = JSON.parse(params.playlists);
 		if (!photo || !params.name) {
 			render([success: false] as JSON)
 		} else {
 			photo.name = params.name;
 			photo.description = params.description;
+			photo.lastUpdated = new Date();
+			playlistsMap.each {
+				Playlist playlist = Playlist.get(it.id);
+				if (it.checked){
+					playlist.addToPhotos(photo)
+				} else {
+					playlist.removeFromPhotos(photo)
+				}
+			}
 			photo.save();
+			
 			if (photo.hasErrors()) {
 				render([success: false] as JSON)
 			} else {
 				render([success: true] as JSON)
 			}
+		}
+	}
+	
+	def getPlaylistsOfPhoto() {
+		Photo photo = Photo.get(params.id);
+		if (!photo) {
+			render([success: false] as JSON)
+		} else {
+			Collection<Long> ids = Playlist.createCriteria().list {
+				projections {
+					property('id')
+				}
+				photos {
+					idEq(photo.id)
+				}
+			}
+			render([success: true, ids: ids] as JSON)
 		}
 	}
 }

@@ -65,24 +65,54 @@
 		$('.edit-photo .photo-name').val(photoMap[id].name);
 		$('.edit-photo .photo-description').val(photoMap[id].description);
 		$('#photo-edit-id').val(id);
-		$('.ui.modal.edit-photo').modal({selector: {close: '.close'}}).modal('show');
+		$.ajax({
+			url: '/playlist/getPlaylistsOfPhoto',
+			data: {
+				id: id
+			},
+			success: function(data) {
+				if (data.success) {
+					$('.edit-photo .ui.checkbox').checkbox('uncheck');
+					$('.edit-photo input.checkbox').toArray().forEach(function(d) {
+						var id = parseInt($(d).attr('id').split('-')[2]);
+						if (data.ids.indexOf(id) != -1) {
+							$(d).parent().checkbox('check');
+						}
+					})
+					$('.ui.modal.edit-photo').modal({selector: {close: '.close'}}).modal('show');
+				} else {
+					console.log('Error')
+				}
+			}
+		});
 	}
 
 	function submitEditPhoto() {
 		if ($('#photo-edit-name').val().length != 0) {
 			$('.edit-photo .form').addClass('loading');
+			var playlists = $('.edit-photo input.checkbox').toArray().map(function(d) {
+				var id = parseInt($(d).attr('id').split('-')[2]);
+				return {
+					id: id,
+					checked: $(d).is(':checked')
+				}
+			});
 			$.ajax({
 				url: '/playlist/editPhoto',
 				data: {
 					name: $('#photo-edit-name').val(),
 					description: $('#photo-edit-description').val(),
-					id: $('#photo-edit-id').val()
+					id: $('#photo-edit-id').val(),
+					playlists: JSON.stringify(playlists)
+					
 				},
 				success: function(data) {
 					if (data.success) {
 						console.log('Success')
 						$('.ui.modal.edit-photo').modal('hide');
 						swal('Success', 'Your photo was successfully updated', 'success');
+						$('#photo-' + $('#photo-edit-id').val() + ' .photo-name').html($('#photo-edit-name').val())
+						$('#photo-' + $('#photo-edit-id').val() + ' .photo-description').html($('#photo-edit-description').val())
 					} else {
 						$('.edit-photo .form').removeClass('warning');
 						$('.edit-photo .form').addClass('error');
